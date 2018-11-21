@@ -91,7 +91,7 @@ let make = _children => {
                 pending =>
                   switch (page, pending) {
                   | (Some(Logout), _) =>
-                    <LogoutPage /> /* !! Provided !! */
+                    <LogoutPage returnUrl={Util.locationOrigin ++ "/"} /> /* !! Provided !! */
                   | (Some(Callback), _) =>
                     <CallbackPage /> /* !! Provided !! */
                   | (_, true) => <LoadingPage />
@@ -109,7 +109,7 @@ let make = _children => {
             ...{
                 _session =>
                   switch (page) {
-                  | Some(Logout) => <LogoutPage /> /* !! Provided !! */
+                  | Some(Logout) => <LogoutPage returnUrl={Util.locationOrigin ++ "/"} /> /* !! Provided !! */
                   | Some(Welcome) => <WelcomePage />
                   | Some(Callback) => React.null
                   | Some(Login) =>
