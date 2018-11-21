@@ -1,7 +1,7 @@
 {
   "name": "bs-auth0-session",
   "version": "0.0.0-development",
-  "description": "BuckleScript bindings to auth0-js",
+  "description": "Session management for ReasonReact using Auth0 for login.",
   "main": "src/WebAuth.bs.js",
   "scripts": {
     "build": "bsb -clean-world -make-world",
