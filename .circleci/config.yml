@@ -1,0 +1,32 @@
+version: 2.1
+
+jobs:
+  build:
+    working_directory: ~/bs-auth0-session
+    docker:
+      - image: circleci/node:10
+    steps:
+      - checkout
+      - run: npm install
+      - run: npm run build
+      - run: npm test
+  deploy:
+    working_directory: ~/bs-auth0-session
+    docker:
+      - image: circleci/node:10
+    steps:
+      - checkout
+      - run: npm install
+      - run: npm run semantic-release
+
+workflows:
+  version: 2
+  ci:
+    jobs:
+      - build
+      - deploy:
+          requires:
+            - build
+          filters:
+            branches:
+              only: master

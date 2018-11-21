@@ -1,6 +1,6 @@
 {
   "name": "bs-auth0-session",
-  "version": "0.1.0",
+  "version": "0.0.0-development",
   "description": "BuckleScript bindings to auth0-js",
   "main": "src/WebAuth.bs.js",
   "scripts": {
