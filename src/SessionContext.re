@@ -77,7 +77,6 @@ module Provider = {
         Js.log2("Login error", error);
         let session = state.session->doLocalLogout;
         let newError = error.error == "login_required" ? None : Some(error);
-        /* TODO: Deal with getting the correct returnUrl for relogin */
         ReasonReact.UpdateWithSideEffects(
           {...state, session, error: newError},
           (self => self.send(Redirect("/login"))),
