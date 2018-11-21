@@ -1,0 +1,48 @@
+{
+  "name": "bs-auth0-session",
+  "version": "0.1.0",
+  "description": "BuckleScript bindings to auth0-js",
+  "main": "src/WebAuth.bs.js",
+  "scripts": {
+    "build": "bsb -clean-world -make-world",
+    "clean": "bsb -clean-world",
+    "prepack": "bsb -clean-world",
+    "format": "bsrefmt --in-place **/*.re",
+    "test": "exit 0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/mscharley/bs-auth0-session.git"
+  },
+  "keywords": [
+    "reason",
+    "reasonml",
+    "ocaml",
+    "bucklescript",
+    "auth0"
+  ],
+  "author": "Matthew Scharley <matt@scharley.me>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mscharley/bs-auth0-session/issues"
+  },
+  "homepage": "https://github.com/mscharley/bs-auth0-session#readme",
+  "peerDependencies": {
+    "auth0-js": "^9.8.1",
+    "bs-auth0-js": "^0.1.0",
+    "bs-platform": "^4.0.7",
+    "bs-querystringify": "^0.1.5",
+    "react": "^16.6.3",
+    "react-dom": "^16.6.3",
+    "reason-react": "^0.5.3"
+  },
+  "devDependencies": {
+    "auth0-js": "^9.8.1",
+    "bs-auth0-js": "^0.1.0",
+    "bs-platform": "^4.0.7",
+    "bs-querystringify": "^0.1.5",
+    "react": "^16.6.3",
+    "react-dom": "^16.6.3",
+    "reason-react": "^0.5.3"
+  }
+}
