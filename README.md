@@ -38,7 +38,7 @@ let urlToString = url =>
 open BsAuth0Session;
 
 type page =
-  | Homepage
+  | Home
   | Callback
   | Logout
   | Login;
@@ -62,7 +62,7 @@ let routerFn: ReasonReact.Router.url => option(page) =
 let component = ReasonReact.reducerComponent("Router");
 
 let make = _children => {
-  let router = (url, {ReasonReact.send}) => url->routerFn->Navigate,
+  let router = (url, {ReasonReact.send}) => url->routerFn->Navigate;
 
   {
     ...component,
@@ -110,7 +110,7 @@ let make = _children => {
                 _session =>
                   switch (page) {
                   | Some(Logout) => <LogoutPage returnUrl={Util.locationOrigin ++ "/"} /> /* !! Provided !! */
-                  | Some(Welcome) => <WelcomePage />
+                  | Some(Home) => <HomePage />
                   | Some(Callback) => React.null
                   | Some(Login) =>
                     React.Router.push("/");
