@@ -12,9 +12,117 @@
 
 ## Synopsis
 
-This package provide access to the auth0-js node package.
+Session management for ReasonReact using Auth0 for login.
 
-This package is heavily WIP at the moment, but the WebAuth class is well covered which allows for use in SPA's reliably. Other usecases aren't covered (yet). Feel free to send a PR or issue!
+## Usage
+
+This is a rather long example, but it should be complete and functional.
+
+```reason
+/* Util.re */
+[@bs.val] [@bs.scope ("window", "location")]
+external locationOrigin: string = "origin";
+
+let urlToString = url =>
+  (
+    switch (url.React.Router.path) {
+    | [] => "/"
+    | _ =>
+      url.React.Router.path->Belt.List.reduce("", (a, b) => a ++ "/" ++ b)
+    }
+  )
+  ++ (url.search != "" ? "?" ++ url.search : "")
+  ++ (url.hash != "" ? "#" ++ url.hash : "");
+
+/* Router.re */
+open BsAuth0Session;
+
+type page =
+  | Homepage
+  | Callback
+  | Logout
+  | Login;
+
+type state = {
+  page: option(page),
+  returnUrl: string,
+};
+
+type action =
+  | Navigate(option(page));
+
+let routerFn: ReasonReact.Router.url => option(page) =
+  fun
+  | {path: []} => Some(Homepage)
+  | {path: ["oauth", "callback"]} => Some(Callback)
+  | {path: ["logout"]} => Some(Logout)
+  | {path: ["login"]} => Some(Login)
+  | _ => None;
+
+let component = ReasonReact.reducerComponent("Router");
+
+let make = _children => {
+  let router = (url, {ReasonReact.send}) => url->routerFn->Navigate,
+
+  {
+    ...component,
+    initialState: _ => {
+      let initialUrl = ReasonReact.Router.dangerouslyGetInitialUrl();
+      {
+        page: initialUrl->routerFn,
+        returnUrl: initialUrl->Util.urlToString,
+      }
+    },
+    didMount: self => {
+      let watcherId = ReasonReact.Router.watchUrl(self.handle(router));
+      self.onUnmount(_ => ReasonReact.Router.unwatchUrl(watcherId));
+    },
+    reducer: (action, state) =>
+      switch (action) {
+      | Navigate(page) => Update({...state, page})
+      },
+    render: ({state: {page, returnUrl}}) =>
+      <SessionContext.Provider
+        domain="my-domain.au.auth0.com"
+        clientId="dJ9HRAcoottSxYnYourClientIdHere"
+        callbackUrl={Util.locationOrigin ++ "/oauth/callback"}>
+          <SessionContext.LoggedOutConsumer>
+            ...{
+                pending =>
+                  switch (page, pending) {
+                  | (Some(Logout), _) =>
+                    <LogoutPage /> /* !! Provided !! */
+                  | (Some(Callback), _) =>
+                    <CallbackPage /> /* !! Provided !! */
+                  | (_, true) => <LoadingPage />
+                  | (_, false) =>
+                    <Button
+                      onClick={
+                        _ev => session->Session.doLogin(~returnUrl, ())
+                      }>
+                      {ReasonReact.string("Login")}
+                    </Button>
+                  }
+              }
+          </SessionContext.LoggedOutConsumer>
+          <SessionContext.LoggedInConsumer>
+            ...{
+                _session =>
+                  switch (page) {
+                  | Some(Logout) => <LogoutPage /> /* !! Provided !! */
+                  | Some(Welcome) => <WelcomePage />
+                  | Some(Callback) => React.null
+                  | Some(Login) =>
+                    React.Router.push("/");
+                    React.null;
+                  | None => <NotFoundPage />
+                  }
+              }
+          </SessionContext.LoggedInConsumer>
+      </SessionContext.Provider>,
+  }
+}
+```
 
   [gh-contrib]: https://github.com/mscharley/bs-auth0-session/graphs/contributors
   [gh-issues]: https://github.com/mscharley/bs-auth0-session/issues
