@@ -124,6 +124,11 @@ let make = _children => {
 }
 ```
 
+There's a whole suite of Consumers for all sorts of use-cases. There is also `SessionContext.Consumer` which is your escape hatch which exposes the raw session data that this library tracks.
+
+Check [`SessionContext.rei`][sc-rei] for more details on the available consumers.
+
   [gh-contrib]: https://github.com/mscharley/bs-auth0-session/graphs/contributors
   [gh-issues]: https://github.com/mscharley/bs-auth0-session/issues
   [license]: https://github.com/mscharley/bs-auth0-session/blob/master/LICENSE
+  [sc-rei]: https://github.com/mscharley/bs-auth0-session/blob/master/src/SessionContext.rei

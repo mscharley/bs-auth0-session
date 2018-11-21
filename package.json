@@ -8,7 +8,8 @@
     "clean": "bsb -clean-world",
     "prepack": "bsb -clean-world",
     "format": "bsrefmt --in-place **/*.re",
-    "test": "exit 0"
+    "test": "exit 0",
+    "semantic-release": "semantic-release"
   },
   "repository": {
     "type": "git",
