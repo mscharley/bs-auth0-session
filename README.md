@@ -53,7 +53,7 @@ type action =
 
 let routerFn: ReasonReact.Router.url => option(page) =
   fun
-  | {path: []} => Some(Homepage)
+  | {path: []} => Some(Home)
   | {path: ["oauth", "callback"]} => Some(Callback)
   | {path: ["logout"]} => Some(Logout)
   | {path: ["login"]} => Some(Login)
