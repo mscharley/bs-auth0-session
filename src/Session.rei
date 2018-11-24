@@ -51,4 +51,5 @@ let doLocalLogout: t => t;
 let doCallback: t => unit;
 
 let accessTokenGet: t => option(accessToken);
+let unsafeAccessTokenRaw: accessToken => string;
 let idGet: t => option(id);

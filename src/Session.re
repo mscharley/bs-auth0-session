@@ -213,6 +213,8 @@ let accessTokenGet =
   | Session(_, accessToken, _) => Some(accessToken)
   | _ => None;
 
+let unsafeAccessTokenRaw = x => x;
+
 let idGet =
   fun
   | Session(_, _, id) => Some(id)
