@@ -1,6 +1,6 @@
 open Belt.Option;
 open Js.Nullable;
-open BsQuerystringify.QueryStringify;
+open QueryStringify;
 open BsAuth0Js;
 
 type accessToken = string;
