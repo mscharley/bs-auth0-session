@@ -32,7 +32,7 @@
     "auth0-js": "^9.8.1",
     "bs-auth0-js": "^0.1.0",
     "bs-platform": "^4.0.7",
-    "bs-querystringify": "^0.1.5",
+    "bs-querystringify": "^1.0.0",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
     "reason-react": "^0.5.3"
@@ -41,7 +41,8 @@
     "auth0-js": "^9.8.1",
     "bs-auth0-js": "^0.1.0",
     "bs-platform": "^4.0.7",
-    "bs-querystringify": "^0.1.5",
+    "bs-querystringify": "^1.0.0",
+    "querystringify": "^2.1.0",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
     "reason-react": "^0.5.3",
