@@ -1,6 +1,7 @@
 # bs-auth0-session
 
 [![npm](https://img.shields.io/npm/v/bs-auth0-session.svg)](https://www.npmjs.com/package/bs-auth0-session)
+[![Greenkeeper badge](https://badges.greenkeeper.io/mscharley/bs-auth0-session.svg)](https://greenkeeper.io/)
 
 **Source:** [https://github.com/mscharley/bs-auth0-session](https://github.com/mscharley/bs-auth0-session)  
 **Author:** Matthew Scharley  
